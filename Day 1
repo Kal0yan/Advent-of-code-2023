@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Advent_of_code_1
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+
+            double realNumber;
+            List<string> list = new List<string>();
+            double sum = 0;
+            string com = Console.ReadLine();
+            while (com != " ")
+            {
+                list.Add(com);
+                com = Console.ReadLine();
+            }
+
+            foreach (string item in list)
+            {
+
+                string newItem = item.Replace("one", "o1e");
+                string newItem2 = newItem.Replace("two", "t2o");
+                string newItem3 = newItem2.Replace("three", "t3e");
+                string newItem4 = newItem3.Replace("four", "f4ur");
+                string newItem5 = newItem4.Replace("five", "f5ve");
+                string newItem6 = newItem5.Replace("six", "s6x");
+                string newItem7 = newItem6.Replace("seven", "s7n");
+                string newItem8 = newItem7.Replace("eight", "ei8ht");
+                string newItem9 = newItem8.Replace("nine", "n9ne");
+
+                Console.WriteLine(newItem9);
+                
+
+                List<int> number = new List<int>();
+                foreach (char symbol in newItem9)
+                {
+                    //Console.WriteLine(symbol);
+                    if (symbol >= '0' && symbol <= '9')
+                    {
+                        int newSymbol = -1;
+                        switch (symbol)
+                        {
+                            case '0': newSymbol = 0; break;
+                            case '1': newSymbol = 1; break;
+                            case '2': newSymbol = 2; break;
+                            case '3': newSymbol = 3; break;
+                            case '4': newSymbol = 4; break;
+                            case '5': newSymbol = 5; break;
+                            case '6': newSymbol = 6; break;
+                            case '7': newSymbol = 7; break;
+                            case '8': newSymbol = 8; break;
+                            case '9': newSymbol = 9; break;
+                        }
+                        number.Add(newSymbol);
+                        //Console.WriteLine(newSymbol);
+                        //Console.WriteLine(String.Join(' ',number));
+                    }
+                }
+                realNumber = (number[0] * 10) + number[number.Count - 1];
+                sum = sum + realNumber;
+
+                realNumber = 0;
+            }
+
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(sum);
+
+
+        }
+    }
+}
