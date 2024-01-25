@@ -1,1 +1,101 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Day_2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string firstCommand = Console.ReadLine();
+            List<Game> games = new List<Game>();
+            uint sum = 0; // here will be the final answer 
+
+            while (firstCommand != " ") // the last command must be " " to stop the program 
+            {
+
+
+                var gameAndNumber = firstCommand.Split(':')[0];
+                var content = firstCommand.Split(':')[1];
+
+                uint numberGame = uint.Parse(gameAndNumber.Split()[1]);
+
+                Game newGame = new Game(numberGame);
+                games.Add(newGame);
+
+
+                List<Cube> cubeList = new List<Cube>();
+
+                for (uint j = 0; j < content.Split(';').Length; j++)
+                {
+                    var draw = content.Split(';')[j];
+
+
+                    for (int i = 0; i < draw.Split(',').Length; i++ )
+                    {
+                        var oneCube = draw.Split(',')[i];
+                        int number = int.Parse((string)oneCube.Split(' ')[0]);
+                        string colour = oneCube.Split(' ')[1];
+                        Cube newCube = new Cube(number, colour);
+
+                        cubeList.Add(newCube);
+
+                    }
+                }
+
+
+
+
+                foreach (Cube cube in cubeList)
+                {
+                    switch (cube.Colour)
+                    {
+                        case "red":
+                            if (cube.Number <= 12)
+                            {
+                                newGame.Possibility = true;
+                                break;
+                            }
+                            else newGame.Possibility = false; return;
+
+                        case "green":
+                            if (cube.Number <= 13)
+                            {
+                                newGame.Possibility = true;
+                                break;
+                            }
+                            else newGame.Possibility = false; return;
+
+                        case "blue":
+                            if (cube.Number <= 14)
+                            {
+                                newGame.Possibility = true;
+                            }
+                            else newGame.Possibility = false; return;
+                    }
+                }
+
+                firstCommand = Console.ReadLine(); // to return to the loop 
+
+            }
+
+            foreach (Game game in games)
+            {
+                if (game.Possibility) sum = sum + game.Number;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(sum); // final 
+            Console.ReadKey();
+
+        }
+
+    }
+}
 
